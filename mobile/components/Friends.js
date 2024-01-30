@@ -31,7 +31,7 @@ export const Friends = ({ navigation }) => {
 
   const getUserItem = ({ item: user }) => {
     const navigateToUser = () => {
-      navigation.navigate("Chat");
+      navigation.navigate("Chat", { user });
     };
 
     return (

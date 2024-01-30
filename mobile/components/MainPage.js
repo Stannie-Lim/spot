@@ -10,6 +10,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { IconButton, MD3Colors } from "react-native-paper";
 
 import { Friends } from "./Friends";
+import { Chat } from "./Chat";
 
 const Stack = createNativeStackNavigator();
 
@@ -64,6 +65,7 @@ export const MainPage = () => {
     <Stack.Navigator>
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="Friends" component={Friends} />
+      <Stack.Screen name="Chat" component={Chat} />
     </Stack.Navigator>
   );
 };
