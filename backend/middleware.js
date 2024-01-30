@@ -21,7 +21,6 @@ const isLoggedIn = async (req, res, next) => {
         userImages: true,
       },
     });
-    console.log(userWithImages);
     req.user = userWithImages;
     next();
   } catch (error) {

@@ -19,6 +19,9 @@ model Users {
   friends    Friend[]     @relation("user")
   friendOf   Friend[]     @relation("friend")
   userImages UserImage[]
+
+  sentMessages     Message[] @relation("toUser")
+  receivedMessages Message[] @relation("fromUser")
 }
 
 model UserImage {
@@ -44,7 +47,20 @@ model Friend {
   friend   Users  @relation("friend", fields: [friendID], references: [id])
   friendID String
 
-  @@id([friendID, userID])
+  id String @id @default(uuid())
+}
+
+model Message {
+  id  String @id @default(uuid())
+  msg String
+
+  fromUser   Users  @relation("fromUser", fields: [fromUserID], references: [id])
+  fromUserID String
+
+  toUser   Users  @relation("toUser", fields: [toUserID], references: [id])
+  toUserID String
+
+  sentAt DateTime
 }
 
 model Tags {
