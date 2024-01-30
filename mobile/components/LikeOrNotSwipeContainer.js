@@ -5,7 +5,7 @@ import { IconButton, MD3Colors } from "react-native-paper";
 
 import axios from "axios";
 
-export const LikeOrNotSwipeContainer = ({ users, setUsers }) => {
+export const LikeOrNotSwipeContainer = ({ users, setUsers, navigation }) => {
   const [index, setIndex] = useState(0);
   const [isMatch, setIsMatch] = useState(false);
 
@@ -53,17 +53,30 @@ export const LikeOrNotSwipeContainer = ({ users, setUsers }) => {
             style={styles.image}
             source={{ uri: user.userImages[0]?.imageURL }}
           />
-          <Pressable onPress={() => setIsMatch(false)}>
-            <Text
-              style={styles.fontsize}
-              onPress={() => {
-                setIsMatch(false);
-                setIndex(index + 1);
-              }}
-            >
-              Continue swiping
-            </Text>
-          </Pressable>
+          <View style={styles.buttons}>
+            <Pressable onPress={() => setIsMatch(false)}>
+              <Text
+                style={styles.fontsize}
+                onPress={() => {
+                  setIsMatch(false);
+                  setIndex(index + 1);
+                }}
+              >
+                Continue swiping
+              </Text>
+            </Pressable>
+            <Pressable onPress={() => setIsMatch(false)}>
+              <Text
+                style={styles.fontsize}
+                onPress={() => {
+                  setIsMatch(false);
+                  navigation.navigate("Chat", { user });
+                }}
+              >
+                Chat
+              </Text>
+            </Pressable>
+          </View>
         </View>
       ) : (
         <View>

@@ -16,7 +16,27 @@ export const Chat = ({
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    socket.emit("join_room", sender.id);
+    socket.connect();
+
+    socket.emit("join_room", {
+      senderID: sender.id,
+      receiverID: receiver.friend.id,
+    });
+
+    socket.on("all_messages", (messages) => {
+      setMessages(
+        messages.map((message) => ({
+          text: message.msg,
+          user: {
+            _id: message.fromUser.id,
+            name: message.fromUser.username,
+            avatar: message.fromUser.userImages[0].imageURL,
+          },
+          createdAt: message.sentAt,
+          _id: message.id,
+        }))
+      );
+    });
 
     socket.on("message", (data) => {
       const message = {
@@ -41,7 +61,6 @@ export const Chat = ({
 
   const onSend = (messages = []) => {
     socket.emit("message", {
-      messageID: messages[0]._id,
       sender,
       receiver,
       message: messages[0].text,

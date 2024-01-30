@@ -56,7 +56,11 @@ export const MainPage = () => {
           <IconButton icon="logout" size={32} onPress={signout} />
           <IconButton icon="account-multiple" size={32} onPress={goToFriends} />
         </View>
-        <LikeOrNotSwipeContainer users={users} setUsers={setUsers} />
+        <LikeOrNotSwipeContainer
+          users={users}
+          setUsers={setUsers}
+          navigation={navigation}
+        />
       </View>
     );
   };
@@ -73,8 +77,6 @@ export const MainPage = () => {
 const styles = StyleSheet.create({
   container: {
     height: "100%",
-    alignItems: "center",
-    justifyContent: "center",
   },
   buttons: {
     flexDirection: "row",
