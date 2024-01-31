@@ -23,7 +23,7 @@ const server = app.listen(3000);
 
 const io = new Server(server, {
   cors: {
-    origin: "exp://192.168.1.113:8081",
+    origin: "*",
   },
 });
 
