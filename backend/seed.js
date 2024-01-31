@@ -5,6 +5,7 @@ const prisma = new PrismaClient();
 
 const seed = async () => {
   try {
+    await prisma.message.deleteMany({});
     await prisma.userImage.deleteMany({});
     await prisma.connection.deleteMany({});
     await prisma.friend.deleteMany({});
