@@ -5,6 +5,8 @@ import { IconButton, MD3Colors } from "react-native-paper";
 
 import axios from "axios";
 
+const BACKEND_URL = process.env.EXPO_PUBLIC_BACKEND_URL;
+
 export const LikeOrNotSwipeContainer = ({ users, setUsers, navigation }) => {
   const [index, setIndex] = useState(0);
   const [isMatch, setIsMatch] = useState(false);
@@ -26,7 +28,7 @@ export const LikeOrNotSwipeContainer = ({ users, setUsers, navigation }) => {
   const onFriend = async () => {
     const token = await AsyncStorage.getItem("token");
     const { data: status } = await axios.post(
-      "http://localhost:3000/api/connections",
+      `${BACKEND_URL}/api/connections`,
       {
         toUserID: user.id,
       },

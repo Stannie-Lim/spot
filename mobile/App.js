@@ -14,6 +14,8 @@ import { MainPage } from "./components/MainPage";
 
 import { UserContext } from "./context/UserContext";
 
+const BACKEND_URL = process.env.EXPO_PUBLIC_BACKEND_URL;
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -24,12 +26,9 @@ export default function App() {
       const token = await AsyncStorage.getItem("token");
 
       if (token) {
-        const { data: user } = await axios.get(
-          "http://localhost:3000/api/auth/me",
-          {
-            headers: { authorization: `Bearer ${token}` },
-          }
-        );
+        const { data: user } = await axios.get(`${BACKEND_URL}/api/auth/me`, {
+          headers: { authorization: `Bearer ${token}` },
+        });
 
         setUser(user);
       }

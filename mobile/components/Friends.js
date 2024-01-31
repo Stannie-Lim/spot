@@ -6,6 +6,8 @@ import axios from "axios";
 import { Text, View, FlatList } from "react-native";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
+const BACKEND_URL = process.env.EXPO_PUBLIC_BACKEND_URL;
+
 export const Friends = ({ navigation }) => {
   const [friends, setFriends] = useState([]);
 
@@ -14,12 +16,9 @@ export const Friends = ({ navigation }) => {
       const token = await AsyncStorage.getItem("token");
 
       try {
-        const { data } = await axios.get(
-          "http://localhost:3000/api/connections",
-          {
-            headers: { authorization: `Bearer ${token}` },
-          }
-        );
+        const { data } = await axios.get(`${BACKEND_URL}/api/connections`, {
+          headers: { authorization: `Bearer ${token}` },
+        });
         setFriends(data);
       } catch (error) {
         console.log(error);

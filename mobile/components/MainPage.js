@@ -12,6 +12,8 @@ import { IconButton, MD3Colors } from "react-native-paper";
 import { Friends } from "./Friends";
 import { Chat } from "./Chat";
 
+const BACKEND_URL = process.env.EXPO_PUBLIC_BACKEND_URL;
+
 const Stack = createNativeStackNavigator();
 
 export const MainPage = () => {
@@ -23,12 +25,9 @@ export const MainPage = () => {
       try {
         const token = await AsyncStorage.getItem("token");
 
-        const { data } = await axios.get(
-          "http://localhost:3000/api/users_to_swipe",
-          {
-            headers: { authorization: `Bearer ${token}` },
-          }
-        );
+        const { data } = await axios.get(`${BACKEND_URL}/api/users_to_swipe`, {
+          headers: { authorization: `Bearer ${token}` },
+        });
 
         setUsers(data);
       } catch (error) {

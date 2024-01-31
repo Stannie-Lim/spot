@@ -47,7 +47,7 @@ export const Chat = ({
           avatar: data.sender.userImages[0].imageURL,
         },
         createdAt: new Date(),
-        _id: data.messageID,
+        _id: data.id,
       };
       setMessages((previousMessages) =>
         GiftedChat.append(previousMessages, message)
@@ -65,6 +65,7 @@ export const Chat = ({
       receiver,
       message: messages[0].text,
       createdAt: messages[0].createdAt,
+      id: messages[0]._id,
     });
 
     setMessages((previousMessages) =>
@@ -92,7 +93,7 @@ export const Chat = ({
 const styles = StyleSheet.create({
   chatContainer: {
     border: "1px solid black",
-    height: "90%",
+    height: "98%",
     width: "100%",
   },
 });
