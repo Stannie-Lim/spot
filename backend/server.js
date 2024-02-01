@@ -18,6 +18,7 @@ app.use(express.json());
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/connections", require("./routes/connections"));
 app.use("/api/users_to_swipe", require("./routes/usersToSwipe"));
+app.use("/api/tags", require("./routes/tags"));
 
 const server = app.listen(3000);
 
