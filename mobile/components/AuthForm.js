@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 
-import { TextInput, Button, View, StyleSheet } from "react-native";
+import { TextInput, View, StyleSheet } from "react-native";
+import { Input } from "react-native-elements";
+import { Button } from "react-native-elements";
 
 export const AuthForm = ({ onSubmit, isLogin }) => {
   const [inputs, setInputs] = useState({
@@ -10,7 +12,7 @@ export const AuthForm = ({ onSubmit, isLogin }) => {
 
   return (
     <View style={styles.container}>
-      <TextInput
+      <Input
         autoCapitalize="none"
         placeholder="Username"
         autoCorrect={false}
@@ -19,7 +21,7 @@ export const AuthForm = ({ onSubmit, isLogin }) => {
           setInputs({ ...inputs, username: value });
         }}
       />
-      <TextInput
+      <Input
         autoCapitalize="none"
         autoCorrect={false}
         placeholder="Password"

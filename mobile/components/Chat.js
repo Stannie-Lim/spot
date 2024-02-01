@@ -1,5 +1,6 @@
 import { useState, useCallback, useEffect, useContext } from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
+import { Text } from "react-native-elements";
 import { GiftedChat } from "react-native-gifted-chat";
 
 import { UserContext } from "../context/UserContext";

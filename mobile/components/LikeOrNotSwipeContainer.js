@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from "react";
-import { Image, StyleSheet, View, Pressable, Text } from "react-native";
+import { Image, StyleSheet, View, Pressable } from "react-native";
+import { Text } from "react-native-elements";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { IconButton, MD3Colors } from "react-native-paper";
 
@@ -110,6 +111,7 @@ export const LikeOrNotSwipeContainer = ({ users, setUsers, navigation }) => {
 const styles = StyleSheet.create({
   container: {
     width: "100%",
+    padding: 16,
   },
   image: {
     width: "100%",

@@ -3,7 +3,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Avatar, ListItem } from "react-native-elements";
 import axios from "axios";
 
-import { Text, View, FlatList } from "react-native";
+import { View, FlatList } from "react-native";
+import { Text } from "react-native-elements";
 import Icon from "react-native-vector-icons/MaterialIcons";
 
 const BACKEND_URL = process.env.EXPO_PUBLIC_BACKEND_URL;

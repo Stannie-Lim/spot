@@ -2,10 +2,12 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, TextInput } from "react-native";
+import { StyleSheet, View, TextInput } from "react-native";
+import { Text } from "react-native-elements";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { AutocompleteDropdownContextProvider } from "react-native-autocomplete-dropdown";
 
 import { LoginPage } from "./components/LoginPage";
 import { RegisterPage } from "./components/RegisterPage";
@@ -38,13 +40,15 @@ export default function App() {
   }, []);
 
   return (
-    <UserContext.Provider value={{ user, setUser }}>
-      <NavigationContainer>
-        <View style={styles.container}>
-          {user ? <MainPage /> : <BottomTabsNavigator />}
-        </View>
-      </NavigationContainer>
-    </UserContext.Provider>
+    <AutocompleteDropdownContextProvider>
+      <UserContext.Provider value={{ user, setUser }}>
+        <NavigationContainer>
+          <View style={styles.container}>
+            {user ? <MainPage /> : <BottomTabsNavigator />}
+          </View>
+        </NavigationContainer>
+      </UserContext.Provider>
+    </AutocompleteDropdownContextProvider>
   );
 }
 

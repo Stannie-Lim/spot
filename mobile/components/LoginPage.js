@@ -13,16 +13,22 @@ export const LoginPage = () => {
   const { setUser } = useContext(UserContext);
 
   const login = async (inputs) => {
-    console.log(inputs);
-    const { data } = await axios.post(`${BACKEND_URL}/api/auth/login`, inputs);
+    try {
+      const { data } = await axios.post(
+        `${BACKEND_URL}/api/auth/login`,
+        inputs
+      );
 
-    await AsyncStorage.setItem("token", data);
+      await AsyncStorage.setItem("token", data);
 
-    const { data: user } = await axios.get(`${BACKEND_URL}/api/auth/me`, {
-      headers: { authorization: `Bearer ${data}` },
-    });
+      const { data: user } = await axios.get(`${BACKEND_URL}/api/auth/me`, {
+        headers: { authorization: `Bearer ${data}` },
+      });
 
-    setUser(user);
+      setUser(user);
+    } catch (error) {
+      console.log(JSON.stringify(error, null, 2));
+    }
   };
 
   return (
