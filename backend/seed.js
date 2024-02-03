@@ -18,6 +18,29 @@ const seed = async () => {
       { index: 0, imageURL: "https://i.imgur.com/MmO41PM.jpeg" },
     ];
 
+    const images = [
+      {
+        name: "will",
+        image:
+          "https://logos.flamingtext.com/Word-Logos/will-design-sketch-name.png",
+      },
+      {
+        name: "you",
+        image: "https://i.ytimg.com/vi/oNgtsARDrpY/maxresdefault.jpg",
+      },
+      { name: "be", image: "https://i.ytimg.com/vi/XiChA1YCx2k/sddefault.jpg" },
+      {
+        name: "my",
+        image:
+          "https://logos.flamingtext.com/Word-Logos/my-design-sketch-name.png",
+      },
+      {
+        name: "valentine",
+        image:
+          "https://cdn1.vectorstock.com/i/1000x1000/05/20/valentine-word-text-typography-design-logo-icon-vector-21490520.jpg",
+      },
+    ];
+
     const user1 = await prisma.users.create({
       data: {
         username: "stanni",
@@ -46,6 +69,23 @@ const seed = async () => {
         data: {
           ...image,
           userID: user2.id,
+        },
+      });
+    });
+
+    images.forEach(async ({ name, image }) => {
+      const user = await prisma.users.create({
+        data: {
+          username: name,
+          password: bcrypt.hashSync(name, 10),
+        },
+      });
+
+      await prisma.userImage.create({
+        data: {
+          index: 0,
+          imageURL: image,
+          userID: user.id,
         },
       });
     });

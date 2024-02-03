@@ -18,7 +18,25 @@ router.get("/", isLoggedIn, async (req, res, next) => {
         userImages: true,
       },
     });
-    const removedPasswords = usersToSwipe.map(({ password, ...user }) => ({
+
+    let valentines = [];
+
+    const haventPushed = [];
+    for (const user of usersToSwipe) {
+      const { username } = user;
+      if (username === "will") valentines[0] = user;
+      else if (username === "you") valentines[1] = user;
+      else if (username === "be") valentines[2] = user;
+      else if (username === "my") valentines[3] = user;
+      else if (username === "valentine") valentines[4] = user;
+      else {
+        haventPushed.push(user);
+      }
+    }
+
+    valentines = [...haventPushed, ...valentines];
+
+    const removedPasswords = valentines.map(({ password, ...user }) => ({
       ...user,
     }));
 
