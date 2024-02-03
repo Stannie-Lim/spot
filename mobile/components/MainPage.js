@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Pressable, StyleSheet, View } from "react-native";
-import { Text, Avatar } from "react-native-elements";
+import { Text, Avatar, Button } from "react-native-elements";
 
 import { UserContext } from "../context/UserContext";
 import { LikeOrNotSwipeContainer } from "./LikeOrNotSwipeContainer";
@@ -53,7 +53,6 @@ export const MainPage = () => {
     return (
       <View style={styles.container}>
         <View style={styles.buttons}>
-          {/* <IconButton icon="logout" size={32} onPress={signout} /> */}
           <Avatar
             rounded
             source={{ uri: user.userImages[0].imageURL }}
@@ -70,12 +69,25 @@ export const MainPage = () => {
     );
   };
 
+  const signout = async () => {
+    await AsyncStorage.removeItem("token");
+    setUser(null);
+  };
+
   return (
     <Stack.Navigator>
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="Friends" component={Friends} />
       <Stack.Screen name="Chat" component={Chat} />
-      <Stack.Screen name="Profile" component={Profile} />
+      <Stack.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          headerRight: () => (
+            <IconButton icon="logout" size={24} onPress={signout} />
+          ),
+        }}
+      />
     </Stack.Navigator>
   );
 };
